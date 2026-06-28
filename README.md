@@ -1,162 +1,103 @@
-# قیمت‌یار — PriceWise Iran
+# PriceWise
 
-مقایسه قیمت لحظه‌ای از ۵۰۰+ فروشگاه معتبر ایران
+A modern price comparison platform for Iranian online stores built with **Next.js** and **TypeScript**.
 
-## Stack
+PriceWise helps users compare product prices from different stores, save products to a wishlist, and make better purchasing decisions through a simple and responsive interface.
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 14 App Router |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS + CSS custom properties |
-| State | Zustand (persisted to localStorage) |
-| Data fetching | TanStack Query v5 |
-| Animations | Framer Motion |
-| Charts | Recharts |
-| Forms | React Hook Form + Zod |
-| Icons | Lucide React |
-| Toasts | Sonner |
-| Price source | Claude API + web_search tool |
+---
 
-## Architecture
+## ✨ Features
 
-```
+* Product search
+* Price comparison
+* Wishlist
+* Price history
+* Price alerts
+* Responsive UI
+* Dark mode
+* RTL support
+
+---
+
+## 🛠 Tech Stack
+
+* Next.js 14 (App Router)
+* TypeScript
+* Tailwind CSS
+* Zustand
+* TanStack Query
+* React Hook Form
+* Zod
+* Framer Motion
+* Recharts
+
+---
+
+## 📁 Project Structure
+
+```text
 src/
-├── app/                  # Next.js App Router pages
-│   ├── page.tsx          # Home
-│   ├── search/           # Search results
-│   ├── product/[slug]/   # Product detail (live prices)
-│   ├── compare/          # Product comparison
-│   ├── wishlist/         # Wishlist
-│   ├── notifications/    # Notifications
-│   ├── dashboard/        # User dashboard
-│   └── login/            # Authentication
+├── app/
 ├── components/
-│   ├── layout/           # Navbar, Providers
-│   ├── ui/               # ProductCard, PriceChart, States
-│   └── features/         # Page-specific feature components
-├── hooks/                # useLivePrices, useSearch
+├── hooks/
 ├── services/
-│   └── priceService.ts   # ⚠️ ONLY source of prices — Claude API
-├── store/                # Zustand stores (auth, wishlist, alerts...)
-├── types/                # TypeScript types (no prices in catalog types)
-├── constants/            # Stores DB, Catalog (names/categories only)
-└── utils/                # formatPrice, relativeTime, cn...
+├── store/
+├── types/
+├── constants/
+└── utils/
 ```
 
-## Critical Rule: No Hardcoded Prices
+---
 
-**All prices come exclusively from `src/services/priceService.ts`.**
+## 🚀 Getting Started
 
-The service calls Claude API with `web_search` enabled to fetch real-time
-prices from Iranian online stores. No component, constant, or store contains
-any hardcoded price data.
+Clone the repository:
 
-If live prices cannot be fetched, the app shows an error with direct links
-to the stores — it never falls back to fake data.
+```bash
+git clone https://github.com/ArshiaBourbour/PriceWise.git
+```
 
-## Supported Stores
+Install dependencies:
 
-| Store | URL |
-|-------|-----|
-| دیجی‌کالا | digikala.com |
-| تکنولایف | technolife.ir |
-| باسلام | basalam.com |
-| ترب | torob.com |
-| ایمالز | emalls.ir |
-| اسنپ مارکت | snapp.market |
-| دیجی‌استایل | digistyle.com |
-| تی‌مارکت | tmarket.ir |
-| بامیلو | bamilo.com |
-| موبایل ۱۴۰ | mobile140.com |
-
-## Setup
-
-### Prerequisites
-- Node.js 18+
-- pnpm (recommended) or npm
-
-### Install
+```bash
+npm install
+```
+or
 
 ```bash
 pnpm install
-# or
-npm install
 ```
 
-### Run development server
+Start the development server:
 
 ```bash
-pnpm dev
-# or
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open your browser at:
 
-### Build for production
-
-```bash
-pnpm build
-pnpm start
+```
+http://localhost:3000
 ```
 
-## Environment Variables
+---
 
-No `.env` file required. The Claude API key is handled automatically
-inside the browser (the API is called from the client side via
-`/v1/messages` endpoint without requiring a key in this setup).
+## 📌 Roadmap
 
-For production deployment with a proper backend, add:
+* Backend API
+* User authentication
+* Better filtering
+* Advanced price tracking
+* Mobile application
 
-```env
-NEXT_PUBLIC_API_URL=https://your-api-server.com
-```
+---
 
-## Pages
+## 🤝 Contributing
 
-| Route | Description |
-|-------|-------------|
-| `/` | Home — catalog browse + search |
-| `/search?q=...` | Search results with filters |
-| `/product/[slug]` | Product detail — live prices + AI analysis |
-| `/compare` | Side-by-side product comparison |
-| `/wishlist` | Saved products |
-| `/notifications` | Price alerts and notifications |
-| `/dashboard` | User profile and settings |
-| `/login` | Authentication |
+Contributions are welcome. Feel free to open an issue or submit a pull request if you have suggestions or improvements.
 
-## Features
+---
 
-- ✅ Real-time price comparison from 10 Iranian stores
-- ✅ AI buying score and recommendation (0-100)
-- ✅ Price history chart (7/30/90 day)
-- ✅ Price alerts with push/email/SMS options
-- ✅ Product wishlist (localStorage persisted)
-- ✅ Side-by-side comparison (up to 4 products)
-- ✅ Smart search (Persian + English + Finglish)
-- ✅ Auto-refresh every 5 minutes on search page
-- ✅ Recently viewed tracking
-- ✅ Dark mode (default)
-- ✅ RTL layout
-- ✅ Responsive (mobile-first)
-- ✅ Glassmorphism UI
-- ✅ Framer Motion animations
+## 📄 License
 
-## Roadmap
-
-### Phase 2
-- [ ] Backend API (NestJS) with real scraping
-- [ ] TimescaleDB for price history
-- [ ] Elasticsearch for search
-- [ ] Push notifications (Web Push API)
-- [ ] SMS integration (Iranian providers)
-- [ ] User registration with OTP
-
-### Phase 3
-- [ ] React Native mobile app
-- [ ] Product image recognition search
-- [ ] Barcode scanner
-- [ ] Seller ratings and reviews
-- [ ] Affiliate commission system
-- [ ] Public API with rate limiting
+This project is licensed under the MIT License.
